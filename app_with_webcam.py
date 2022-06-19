@@ -105,8 +105,7 @@ def main():
     inp = None
     out = None
 
-    # input_choice = st.sidebar.selectbox("Select Input", ("Upload Picture", "Webcam"))
-    input_choice = "Upload Picture"
+    input_choice = st.sidebar.selectbox("Select Input", ("Upload Picture", "Webcam"))
 
     gray = st.sidebar.checkbox('Convert Input to Black & White')
 
@@ -122,13 +121,13 @@ def main():
             col1.image(img, width=300)
         vid = False
 
-    # else:
-    #     camera = cv2.VideoCapture(0)
-    #     col1.text("This is the original picture")
-    #     frame_in = col1.image([], width=500)
-    #     col2.text("This is the edited picture")
-    #     frame_out = col2.image([], width=500)
-    #     vid = True
+    else:
+        camera = cv2.VideoCapture(0)
+        col1.text("This is the original picture")
+        frame_in = col1.image([], width=500)
+        col2.text("This is the edited picture")
+        frame_out = col2.image([], width=500)
+        vid = True
 
     choice = st.sidebar.selectbox("Select Functions",
                                     ("None", "Gamma Correction", "Low Pass Filter", "Threshold",
