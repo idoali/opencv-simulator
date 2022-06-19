@@ -105,16 +105,9 @@ def main():
     inp = None
     out = None
 
-    choice = st.sidebar.selectbox("Select Functions",
-                                    ("None", "Gamma Correction", "Low Pass Filter", "Threshold",
-                                     "Canny Threshold"))
-    params = get_params(choice)
-
-    if choice != "None":
-        st.markdown(md[choice])
-        st.code(code[choice])
-
     input_choice = st.sidebar.selectbox("Select Input", ("Upload Picture", "Webcam"))
+
+    gray = st.sidebar.checkbox('Convert Input to Black & White')
 
     col1, col2 = st.columns(2)
     
@@ -136,15 +129,31 @@ def main():
         frame_out = col2.image([], width=500)
         vid = True
 
+    choice = st.sidebar.selectbox("Select Functions",
+                                    ("None", "Gamma Correction", "Low Pass Filter", "Threshold",
+                                     "Canny Threshold"))
+    params = get_params(choice)
+
     while vid:
         _, inp = camera.read()
         inp = cv2.cvtColor(inp, cv2.COLOR_BGR2RGB) / 255
-        img = Image.fromarray(np.uint8(inp * 255)).convert('RGB')
+        img = Image.fromarray(np.uint8(inp * 255))
         frame_in.image(img)
+        if gray:
+            inp = cv2.cvtColor(np.uint8(inp * 255), cv2.COLOR_RGB2GRAY) / 255
         out = generate_output(choice, params, inp)
         frame_out.image(out)
 
+
+    if choice != "None":
+        st.markdown(md[choice])
+        st.markdown("# Code")
+        st.code(code[choice])
+
     if inp is not None:
+        if gray:
+            img = cv2.cvtColor(np.uint8(inp * 255), cv2.COLOR_RGB2GRAY)
+            inp = get_array(img) / 255
         out = generate_output(choice, params, inp)
         
     if out is not None:
