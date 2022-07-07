@@ -34,7 +34,7 @@ def canny_thresh(inp, thresh1, thresh2):
 def thresh(inp, option, thresh1, thresh2):
     funcs = ["cv2.THRESH_BINARY", "cv2.THRESH_BINARY_INV",
              "cv2.THRESH_TRUNC", "cv2.THRESH_TOZERO", "cv2.THRESH_TOZERO_INV"]
-    names = ["Binary", "Binary Inverse", "Trunc", "Tozero Inverse", 
+    names = ["Binary", "Binary Inverse", "Trunc", "Tozero", 
              "Tozero Inverse"]
     for n, f in zip(names, funcs):
         if option == n:
@@ -82,7 +82,7 @@ def get_params(choice):
         st.sidebar.header('Input Threshold')
         option = st.sidebar.selectbox('Threshold Type', 
                                       ("Binary", "Binary Inverse", "Trunc", 
-                                       "Tozero Inverse", "Tozero Inverse"))                           
+                                       "Tozero", "Tozero Inverse"))                           
         t1_t = st.sidebar.slider('Threshold 1', 0, 80, 250)
         t2_t = st.sidebar.slider('Threshold 2', 0, 80, 250)
         params = [option, t1_t, t2_t]
@@ -147,6 +147,9 @@ def main():
 
     if choice != "None":
         st.markdown(md[choice])
+        if choice == "Low Pass Filter":
+            kernel_img = Image.open('assets/kernel.gif')
+            st.write("![Your Awsome GIF](https://media3.giphy.com/media/PUmwonv8z3yAwXImkB/giphy.gif?cid=790b7611c1b063dc686f8ccb5f453f102787993275597f14&rid=giphy.gif&ct=g)")
         st.markdown("# Code")
         st.code(code[choice])
 
