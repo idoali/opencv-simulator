@@ -89,8 +89,8 @@ def get_params(choice):
 
     elif choice == "Canny Threshold":
         st.sidebar.header('Input Canny Threshold')
-        t1_c = st.sidebar.slider('Threshold_1', 0, 80, 250)
-        t2_c = st.sidebar.slider('Threshold_2', 0, 80, 250) 
+        t1_c = st.sidebar.slider('Threshold_1', 0, 80, 255)
+        t2_c = st.sidebar.slider('Threshold_2', 0, 80, 255) 
         params = [t1_c, t2_c]
 
     else:

@@ -83,8 +83,8 @@ def get_params(choice):
         option = st.sidebar.selectbox('Threshold Type', 
                                       ("Binary", "Binary Inverse", "Trunc", 
                                        "Tozero", "Tozero Inverse"))                           
-        t1_t = st.sidebar.slider('Threshold 1', 0, 80, 250)
-        t2_t = st.sidebar.slider('Threshold 2', 0, 80, 250)
+        t1_t = st.sidebar.slider('Threshold 1', 0, 80, 255)
+        t2_t = st.sidebar.slider('Threshold 2', 0, 80, 255)
         params = [option, t1_t, t2_t]
 
     elif choice == "Canny Threshold":
